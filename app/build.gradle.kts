@@ -1,21 +1,25 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
-    namespace = "com.gdlkug.my.pokeballs"
-    compileSdk = 34
+    namespace = "com.jsomven.pokedex"
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.gdlkug.my.pokeballs"
-        minSdk = 24
-        targetSdk = 34
+        applicationId = "com.jsomven.pokedex"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.compileSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -28,32 +32,56 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
+    //Compose
+    implementation(libs.bundles.compose.all)
+    implementation(libs.activity.compose)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    //Voyager
+    implementation(libs.bundles.voyager)
+
+    // For splash screen
+    implementation(libs.core.splash)
+
+    //Coil with Compose Extension
+    implementation(libs.bundles.coil.compose)
+
+    //Arrow
+    implementation(libs.arrow.core)
+
+    //DI
+    implementation(libs.hilt)
+    ksp(libs.hilt.ksp)
+
+    //Retrofit
+    implementation(libs.bundles.retrofit.all)
+
+    //Room
+    implementation(libs.bundles.room)
+    ksp(libs.room.ksp)
+
+    //Test
+    testImplementation(libs.junit.ktx)
+    testImplementation(libs.room.test)
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.bundles.compose.testing)
 }

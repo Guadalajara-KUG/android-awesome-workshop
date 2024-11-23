@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">My Pokeballs</string>
+    <string name="app_name">pokedex</string>
+    <string name="ups">Ha ocurrido algo (｡´︵｀｡)</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="loading">Loading…</string>
+    <string name="pokemon_not_found">Pokemon Not Found</string>
+    <string name="evolution_chain">Linea Evolutiva</string>
+    <string name="abilities">Habilidades</string>
+    <string name="happiness">Felicidad base: %1$d</string>
+    <string name="capture_rate">Ratio de Captura: %1$d</string>
+    <string name="egg_groups">Grupos huevo:</string>
 </resources>
