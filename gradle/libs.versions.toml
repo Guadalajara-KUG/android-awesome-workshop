@@ -17,7 +17,7 @@ junitKtx = "1.1.5"
 room = "2.5.0"
 hilt = "2.52"
 
-voyager = "1.0.0"
+voyager = "1.1.0-beta03"
 coil = "2.5.0"
 arrow = "1.2.0"
 detekt = "1.23.7"
