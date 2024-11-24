@@ -20,7 +20,7 @@ hilt = "2.52"
 voyager = "1.0.0"
 coil = "2.5.0"
 arrow = "1.2.0"
-detekt = "1.23.1"
+detekt = "1.23.7"
 
 retrofit = "2.9.0"
 okhttp = "4.10.0"
