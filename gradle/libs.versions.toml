@@ -1,9 +1,10 @@
 [versions]
+agp = "8.7.2"
+androidx-coreKtx = "1.13.1"
 compileSdk = "34"
+kotlin = "2.0.20"
+ksp = "2.0.20-1.0.25"
 minSdk = "24"
-agp = "8.1.2"
-kotlin = "1.9.10"
-ksp = "1.9.10-1.0.13"
 
 splash = "1.0.1"
 compose = "1.5.3"
@@ -14,7 +15,7 @@ kotlinxCoroutinesAndroid = "1.7.3"
 junit = "4.13"
 junitKtx = "1.1.5"
 room = "2.5.0"
-hilt = "2.48"
+hilt = "2.52"
 
 voyager = "1.0.0"
 coil = "2.5.0"
@@ -27,6 +28,7 @@ gson = "2.10.1"
 
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-coreKtx = { group = "androidxx.core", name = "core-ktx", version.ref = "androidx-coreKtx" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "compose" }
 compose-material = { group = "androidx.compose.material", name = "material", version.ref = "compose" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "composeMaterial3" }
@@ -72,19 +74,33 @@ room-test = { module = "androidx.room:room-testing", version.ref = "room" }
 
 [bundles]
 compose-all = [
-    "compose-foundation", "compose-material", "compose-material3", "compose-ui", "compose-ui-tooling",
-    "compose-ui-tooling-preview", "compose-viewmodel"
+  "compose-foundation",
+  "compose-material",
+  "compose-material3",
+  "compose-ui",
+  "compose-ui-tooling",
+  "compose-ui-tooling-preview",
+  "compose-viewmodel",
 ]
 compose-testing = ["compose-ui-test", "compose-ui-test-junit4"]
 
 voyager = [
-    "voyager-navigator", "voyager-screenModel", "voyager-bottomSheetNavigator", "voyager-tabNavigator",
-    "voyager-transitions", "voyager-hilt"
+  "voyager-navigator",
+  "voyager-screenModel",
+  "voyager-bottomSheetNavigator",
+  "voyager-tabNavigator",
+  "voyager-transitions",
+  "voyager-hilt",
 ]
 
 coil-compose = ["coil", "coil-compose"]
 
-retrofit-all = ["retrofit", "retrofit-converter", "retrofit-okhttp", "retrofit-gson"]
+retrofit-all = [
+  "retrofit",
+  "retrofit-converter",
+  "retrofit-okhttp",
+  "retrofit-gson",
+]
 
 room = ["room", "room-ktx"]
 
@@ -93,5 +109,6 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

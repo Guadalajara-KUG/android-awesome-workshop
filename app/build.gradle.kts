@@ -1,18 +1,28 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
 }
 
 android {
     namespace = "com.jsomven.pokedex"
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk =
+        libs.versions.compileSdk
+            .get()
+            .toInt()
 
     defaultConfig {
         applicationId = "com.jsomven.pokedex"
-        minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.compileSdk.get().toInt()
+        minSdk =
+            libs.versions.minSdk
+                .get()
+                .toInt()
+        targetSdk =
+            libs.versions.compileSdk
+                .get()
+                .toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -27,7 +37,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -52,34 +62,34 @@ android {
 }
 
 dependencies {
-    //Compose
+    // Compose
     implementation(libs.bundles.compose.all)
     implementation(libs.activity.compose)
 
-    //Voyager
+    // Voyager
     implementation(libs.bundles.voyager)
 
     // For splash screen
     implementation(libs.core.splash)
 
-    //Coil with Compose Extension
+    // Coil with Compose Extension
     implementation(libs.bundles.coil.compose)
 
-    //Arrow
+    // Arrow
     implementation(libs.arrow.core)
 
-    //DI
+    // DI
     implementation(libs.hilt)
     ksp(libs.hilt.ksp)
 
-    //Retrofit
+    // Retrofit
     implementation(libs.bundles.retrofit.all)
 
-    //Room
+    // Room
     implementation(libs.bundles.room)
     ksp(libs.room.ksp)
 
-    //Test
+    // Test
     testImplementation(libs.junit.ktx)
     testImplementation(libs.room.test)
     androidTestImplementation(libs.junit)

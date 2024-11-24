@@ -35,10 +35,6 @@ tasks.withType<Detekt>().configureEach {
     }
 }
 
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
-}
-
 dependencies {
     detektPlugins(libs.detekt.formatting)
 }
