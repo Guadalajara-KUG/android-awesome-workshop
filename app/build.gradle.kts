@@ -54,6 +54,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.coreKtx)
+
     // Compose
     implementation(libs.bundles.compose.all)
     implementation(libs.activity.compose)
