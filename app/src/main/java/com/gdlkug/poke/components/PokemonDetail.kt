@@ -16,9 +16,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.gdlkug.poke.core.domain.model.EggGroups
-import com.gdlkug.poke.core.domain.model.EvolutionChainResource
-import com.gdlkug.poke.core.domain.model.PokemonSpecies
+import com.gdlkug.poke.data.model.EggGroups
+import com.gdlkug.poke.data.model.EvolutionChainResource
+import com.gdlkug.poke.data.model.PokemonSpecies
 import com.gdlkug.poke.R
 
 @Composable

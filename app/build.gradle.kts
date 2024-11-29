@@ -69,9 +69,6 @@ dependencies {
     // Coil with Compose Extension
     implementation(libs.bundles.coil.compose)
 
-    // Arrow
-    implementation(libs.arrow.core)
-
     // DI
     implementation(libs.hilt)
     ksp(libs.hilt.ksp)

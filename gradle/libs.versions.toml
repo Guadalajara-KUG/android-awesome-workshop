@@ -19,7 +19,6 @@ hilt = "2.52"
 
 voyager = "1.1.0-beta03"
 coil = "2.5.0"
-arrow = "1.2.0"
 detekt = "1.23.7"
 
 retrofit = "2.9.0"
@@ -53,8 +52,6 @@ voyager-hilt = { module = "cafe.adriel.voyager:voyager-hilt", version.ref = "voy
 
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
-
-arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
 
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-ksp = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }

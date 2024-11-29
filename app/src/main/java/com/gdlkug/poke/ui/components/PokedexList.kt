@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.gdlkug.poke.components.PokemonItem
-import com.gdlkug.poke.core.domain.model.PokemonPreview
+import com.gdlkug.poke.data.model.PokemonPreview
 
 @Composable
 fun PokedexList(

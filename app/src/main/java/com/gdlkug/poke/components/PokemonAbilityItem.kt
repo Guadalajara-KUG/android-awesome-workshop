@@ -18,7 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gdlkug.poke.R
-import com.gdlkug.poke.core.domain.model.Ability
+import com.gdlkug.poke.data.model.Ability
 
 @Composable
 fun PokemonAbilityItem(modifier: Modifier, ability: Ability) {
