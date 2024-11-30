@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.gdlkug.poke.components.PokemonItem
 import com.gdlkug.poke.data.model.PokemonPreview
 
 @Composable
@@ -16,13 +15,13 @@ fun PokedexList(
     pokemons: List<PokemonPreview>,
     onItemClicked: (PokemonPreview) -> Unit,
     onLargeItemClicked: (PokemonPreview) -> Unit,
-    itemsByRow: Int = 3
+    itemsByRow: Int = 3,
 ) {
     LazyVerticalStaggeredGrid(
         modifier = Modifier.padding(16.dp),
         columns = StaggeredGridCells.Fixed(itemsByRow),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalItemSpacing = 16.dp
+        verticalItemSpacing = 16.dp,
     ) {
         items(pokemons) { pokemon ->
             PokemonItem(pokemon, onItemClicked, onLargeItemClicked)

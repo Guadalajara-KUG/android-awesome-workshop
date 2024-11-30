@@ -1,4 +1,4 @@
-package com.gdlkug.poke.components
+package com.gdlkug.poke.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
@@ -14,7 +14,7 @@ fun FavoriteButton() {
     Icon(
         tint = MaterialTheme.colorScheme.primary,
         painter = painterResource(id = R.drawable.ic_star_fill),
-        contentDescription = Icons.Filled.Star.name
+        contentDescription = Icons.Filled.Star.name,
     )
 }
 

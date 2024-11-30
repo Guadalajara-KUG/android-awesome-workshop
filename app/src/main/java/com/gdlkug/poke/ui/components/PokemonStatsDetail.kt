@@ -1,4 +1,4 @@
-package com.gdlkug.poke.components
+package com.gdlkug.poke.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,43 +18,50 @@ import androidx.compose.ui.unit.dp
 import com.gdlkug.poke.R
 
 @Composable
-fun <T> PokemonStatsDetail(happiness: Int, captureRate: Int, eggGroups: List<T>) {
+fun <T> PokemonStatsDetail(
+    happiness: Int,
+    captureRate: Int,
+    eggGroups: List<T>,
+) {
     Card(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiary,
-        )
-    ) {
-        Column(
-            modifier = Modifier
+        modifier =
+            Modifier
                 .padding(16.dp)
                 .fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.tertiary,
+            ),
+    ) {
+        Column(
+            modifier =
+                Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
         ) {
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = stringResource(id = R.string.happiness, happiness),
-                color = Color.Black
+                color = Color.Black,
             )
 
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = stringResource(id = R.string.capture_rate, captureRate),
-                color = Color.Black
+                color = Color.Black,
             )
 
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = stringResource(id = R.string.egg_groups),
-                color = Color.Black
+                color = Color.Black,
             )
 
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = eggGroups.joinToString(" , ", prefix = " ", postfix = " "),
-                color = Color.Black
+                color = Color.Black,
             )
         }
     }

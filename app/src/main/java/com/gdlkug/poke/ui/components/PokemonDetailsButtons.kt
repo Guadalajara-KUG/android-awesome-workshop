@@ -1,4 +1,4 @@
-package com.gdlkug.poke.components
+package com.gdlkug.poke.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

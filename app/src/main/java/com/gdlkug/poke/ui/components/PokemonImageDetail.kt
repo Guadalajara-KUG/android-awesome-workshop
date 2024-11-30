@@ -1,4 +1,4 @@
-package com.gdlkug.poke.components
+package com.gdlkug.poke.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,35 +15,42 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PokemonImageDetail(pokemonId: Int, name: String, imageUrl: String) {
+fun PokemonImageDetail(
+    pokemonId: Int,
+    name: String,
+    imageUrl: String,
+) {
     Card(
         modifier = Modifier.padding(16.dp),
         shape = RoundedCornerShape(32.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiary,
-        )
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.tertiary,
+            ),
     ) {
         if (pokemonId == -1) {
             PokemonImageNotFound(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .padding(top = 16.dp, bottom = 16.dp)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .padding(top = 16.dp, bottom = 16.dp),
             )
         } else {
             PokemonImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
                 pokemonName = name,
-                pokemonUrlImage = imageUrl
+                pokemonUrlImage = imageUrl,
             )
         }
 
         Text(
             text = name,
             color = Color.Black,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally),
         )
     }
 }

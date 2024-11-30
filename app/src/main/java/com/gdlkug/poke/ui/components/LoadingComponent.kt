@@ -1,4 +1,4 @@
-package com.gdlkug.poke.components
+package com.gdlkug.poke.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,7 @@ fun LoadingComponent() {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         CircularProgressIndicator()
         Text(text = stringResource(id = R.string.loading))

@@ -1,4 +1,4 @@
-package com.gdlkug.poke.components
+package com.gdlkug.poke.ui.components
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 fun <T> PokemonListColumn(
     modifier: Modifier,
     itemList: List<T>,
-    itemComposable: @Composable (T) -> Unit
+    itemComposable: @Composable (T) -> Unit,
 ) {
     LazyColumn(modifier = modifier) {
         items(itemList) { item ->

@@ -1,4 +1,4 @@
-package com.gdlkug.poke.components
+package com.gdlkug.poke.ui.components
 
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Text
@@ -9,20 +9,24 @@ import cafe.adriel.voyager.navigator.Navigator
 import com.gdlkug.poke.R
 
 @Composable
-fun CustomAlertDialog(navigator: Navigator, message: String?, code: Int) {
+fun CustomAlertDialog(
+    navigator: Navigator,
+    message: String?,
+    code: Int,
+) {
     AlertDialog(
         onDismissRequest = {
             navigator.pop()
         },
         title = {
             Text(
-                text = stringResource(id = R.string.ups)
+                text = stringResource(id = R.string.ups),
             )
         },
         text = {
             Text(
                 "$message" +
-                    "$code"
+                    "$code",
             )
         },
         confirmButton = {},
@@ -31,9 +35,9 @@ fun CustomAlertDialog(navigator: Navigator, message: String?, code: Int) {
                 navigator.pop()
             }) {
                 Text(
-                    text = stringResource(id = R.string.dismiss)
+                    text = stringResource(id = R.string.dismiss),
                 )
             }
-        }
+        },
     )
 }

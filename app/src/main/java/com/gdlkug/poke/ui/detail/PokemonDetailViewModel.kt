@@ -1,13 +1,12 @@
-package com.gdlkug.poke.ui.details
+package com.gdlkug.poke.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gdlkug.poke.data.errors.PokemonException
 import com.gdlkug.poke.data.model.PokemonSpecies
-import com.gdlkug.poke.domain.GetPokemonDetailByIdOrNameUseCase
-import com.gdlkug.poke.util.default
+import com.gdlkug.poke.domain.useCase.GetPokemonDetailByIdOrNameUseCase
+import com.gdlkug.poke.util.extension.default
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,7 +24,7 @@ class PokemonDetailViewModel
         val pokemonDetailUiState: StateFlow<PokemonDetailUiState> = _pokemonDetailUiState.asStateFlow()
 
         fun getPokemonSpeciesDetailByIdOrName(pokemonId: String) {
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch {
                 _pokemonDetailUiState.value =
                     getPokemonDetailByIdOrNameUseCase(pokemonId).fold(
                         PokemonDetailUiState::SpeciesFeed,

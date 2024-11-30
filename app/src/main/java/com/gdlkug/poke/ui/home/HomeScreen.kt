@@ -12,11 +12,11 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.gdlkug.poke.components.CustomAlertDialog
-import com.gdlkug.poke.components.LoadingComponent
 import com.gdlkug.poke.data.model.PokemonPreview
+import com.gdlkug.poke.ui.components.CustomAlertDialog
+import com.gdlkug.poke.ui.components.LoadingComponent
 import com.gdlkug.poke.ui.components.PokedexList
-import com.gdlkug.poke.ui.details.PokemonDetailScreen
+import com.gdlkug.poke.ui.detail.PokemonDetailScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi

@@ -6,9 +6,7 @@ import com.gdlkug.poke.data.model.PokemonSpecies
 import com.google.gson.annotations.SerializedName
 
 data class PokemonSpeciesResponse(
-    @SerializedName("id")
     val id: Int? = null,
-    @SerializedName("name")
     val name: String? = null,
     @SerializedName("capture_rate")
     val captureRate: Int? = null,
@@ -24,12 +22,12 @@ data class EggGroupsResponse(
     @SerializedName("name")
     val name: String? = null,
     @SerializedName("url")
-    val url: String? = null
+    val url: String? = null,
 )
 
 data class EvolutionChainResourceResponse(
     @SerializedName("url")
-    val url: String? = null
+    val url: String? = null,
 )
 
 fun PokemonSpeciesResponse.toPokemonSpecies(): PokemonSpecies =
@@ -39,16 +37,17 @@ fun PokemonSpeciesResponse.toPokemonSpecies(): PokemonSpecies =
         captureRate = captureRate ?: -1,
         baseHappiness = baseHappiness ?: -1,
         eggGroups = eggGroups.map { it.toEggGroups() },
-        evolutionChain = evolutionChain?.toEvolutionChain()
-            ?: EvolutionChainResource("")
+        evolutionChain =
+            evolutionChain?.toEvolutionChain()
+                ?: EvolutionChainResource(""),
     )
 
 fun EggGroupsResponse.toEggGroups(): EggGroups =
     EggGroups(
-        name = name ?: ""
+        name = name ?: "",
     )
 
 fun EvolutionChainResourceResponse.toEvolutionChain(): EvolutionChainResource =
     EvolutionChainResource(
-        name = url ?: ""
+        name = url ?: "",
     )

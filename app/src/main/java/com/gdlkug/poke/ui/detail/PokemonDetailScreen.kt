@@ -1,4 +1,4 @@
-package com.gdlkug.poke.ui.details
+package com.gdlkug.poke.ui.detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -12,15 +12,16 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.gdlkug.poke.components.CustomAlertDialog
-import com.gdlkug.poke.components.LoadingComponent
 import com.gdlkug.poke.data.model.PokemonPreview
+import com.gdlkug.poke.ui.components.CustomAlertDialog
+import com.gdlkug.poke.ui.components.LoadingComponent
 import com.gdlkug.poke.ui.home.HomeScreen
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class PokemonDetailScreen(
-    @Transient private val pokemon: PokemonPreview
+    @Transient private val pokemon: PokemonPreview,
 ) : Screen {
-
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
@@ -28,9 +29,10 @@ class PokemonDetailScreen(
         val pokemonDetailUiState by pokemonDetailViewModel.pokemonDetailUiState.collectAsState()
 
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.onBackground)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.onBackground),
         ) {
             val id = if (pokemon.id == HomeScreen.POKEMON_BY_URL) pokemon.name else pokemon.id.toString()
             pokemonDetailViewModel.getPokemonSpeciesDetailByIdOrName(id)
@@ -44,12 +46,12 @@ class PokemonDetailScreen(
                     CustomAlertDialog(
                         navigator,
                         state.error.message,
-                        state.error.code
+                        state.error.code,
                     )
                 }
 
                 is PokemonDetailUiState.SpeciesFeed -> {
-                    com.gdlkug.poke.components.PokemonDetail(
+                    com.gdlkug.poke.ui.components.PokemonDetail(
                         modifier = Modifier.fillMaxSize(),
                         pokemon = state.pokemonSpecies,
                         onEvolutionChainClick = {
@@ -57,7 +59,7 @@ class PokemonDetailScreen(
                         },
                         onAbilitiesClick = {
                             TODO("@Daniel This is pending to talk with som")
-                        }
+                        },
                     )
                 }
             }

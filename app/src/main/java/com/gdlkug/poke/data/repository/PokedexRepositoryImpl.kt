@@ -9,20 +9,24 @@ import com.gdlkug.poke.data.model.toPokemonEntity
 import com.gdlkug.poke.data.network.dto.toPokemon
 import com.gdlkug.poke.data.network.dto.toPokemonEntity
 import com.gdlkug.poke.data.network.services.PokedexRetrofitService
-import com.gdlkug.poke.domain.repository.PokedexRepository
-import com.gdlkug.poke.util.default
+import com.gdlkug.poke.di.IoDispatcher
+import com.gdlkug.poke.util.extension.default
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class PokedexRepositoryImpl
     @Inject
     constructor(
+        // TODO: @Daniel Re-add clients
         private val pokedexService: PokedexRetrofitService,
         private val pokemonDao: PokemonDao,
+        @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     ) : PokedexRepository {
         override fun observePokedex(): Flow<Result<Pokedex>> =
             pokemonDao.getPokemonList().flatMapLatest { localList ->
@@ -38,7 +42,10 @@ class PokedexRepositoryImpl
 
         private suspend fun refreshPokedex(): Result<Pokedex> =
             try {
-                val response = pokedexService.getPokemonList()
+                val response =
+                    withContext(ioDispatcher) {
+                        pokedexService.getPokemonList()
+                    }
                 if (response.isSuccessful) {
                     val results = response.body()?.results.default(emptyList())
                     pokemonDao.insertPokemonList(results.toPokemonEntity())

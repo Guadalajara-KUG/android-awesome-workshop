@@ -1,4 +1,4 @@
-package com.gdlkug.poke.components
+package com.gdlkug.poke.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
@@ -12,6 +12,6 @@ fun PokemonImageNotFound(modifier: Modifier) {
     Image(
         painter = painterResource(id = R.drawable.unkwon),
         contentDescription = stringResource(id = R.string.pokemon_not_found),
-        modifier = modifier
+        modifier = modifier,
     )
 }

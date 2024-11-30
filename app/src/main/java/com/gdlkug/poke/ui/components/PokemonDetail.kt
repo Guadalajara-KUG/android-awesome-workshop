@@ -1,4 +1,4 @@
-package com.gdlkug.poke.components
+package com.gdlkug.poke.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,10 +16,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.gdlkug.poke.R
 import com.gdlkug.poke.data.model.EggGroups
 import com.gdlkug.poke.data.model.EvolutionChainResource
 import com.gdlkug.poke.data.model.PokemonSpecies
-import com.gdlkug.poke.R
 
 @Composable
 fun PokemonDetail(
@@ -31,37 +31,38 @@ fun PokemonDetail(
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         PokemonImageDetail(
             pokemonId = pokemon.id,
             name = pokemon.name,
-            imageUrl = pokemon.imageUrl
+            imageUrl = pokemon.imageUrl,
         )
 
         PokemonStatsDetail(
             happiness = pokemon.baseHappiness,
             captureRate = pokemon.captureRate,
-            eggGroups = pokemon.eggGroups
+            eggGroups = pokemon.eggGroups,
         )
 
         if (pokemon.id > 0) {
             PokemonDetailsButtons(
                 onEvolutionChainClick = onEvolutionChainClick,
-                onAbilitiesClick = onAbilitiesClick
+                onAbilitiesClick = onAbilitiesClick,
             )
         } else {
             Spacer(modifier = Modifier.height(32.dp))
             Text(
                 text = stringResource(id = R.string.pokemon_not_found),
-                fontSize = 24.sp
+                fontSize = 24.sp,
             )
         }
 
         Spacer(
-            modifier = Modifier
-                .weight(1f)
-                .background(MaterialTheme.colorScheme.onBackground)
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .background(MaterialTheme.colorScheme.onBackground),
         )
     }
 }
@@ -69,24 +70,27 @@ fun PokemonDetail(
 @Preview
 @Composable
 fun PokemonDetailPreview() {
-    val pokemon = PokemonSpecies(
-        id = -1,
-        name = "bulbasaur",
-        captureRate = -2,
-        baseHappiness = -3,
-        eggGroups = listOf(
-            EggGroups("Dragon"),
-            EggGroups("Hada")
-        ),
-        evolutionChain = EvolutionChainResource("")
-    )
+    val pokemon =
+        PokemonSpecies(
+            id = -1,
+            name = "bulbasaur",
+            captureRate = -2,
+            baseHappiness = -3,
+            eggGroups =
+                listOf(
+                    EggGroups("Dragon"),
+                    EggGroups("Hada"),
+                ),
+            evolutionChain = EvolutionChainResource(""),
+        )
 
     PokemonDetail(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(Color.White),
         pokemon = pokemon,
         onAbilitiesClick = {},
-        onEvolutionChainClick = {}
+        onEvolutionChainClick = {},
     )
 }

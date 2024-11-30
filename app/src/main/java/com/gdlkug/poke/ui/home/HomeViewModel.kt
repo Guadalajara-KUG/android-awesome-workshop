@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.gdlkug.poke.data.errors.PokedexException
 import com.gdlkug.poke.data.model.Pokedex
 import com.gdlkug.poke.data.model.PokemonPreview
-import com.gdlkug.poke.domain.GetPokedexListUseCase
-import com.gdlkug.poke.domain.MarkPokemonAsFavoriteUseCase
-import com.gdlkug.poke.util.default
+import com.gdlkug.poke.domain.useCase.GetPokedexListUseCase
+import com.gdlkug.poke.domain.useCase.MarkPokemonAsFavoriteUseCase
+import com.gdlkug.poke.util.extension.default
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,7 +22,7 @@ import javax.inject.Inject
 class HomeViewModel
     @Inject
     constructor(
-        private val getPokedexListUseCase: GetPokedexListUseCase,
+        getPokedexListUseCase: GetPokedexListUseCase,
         private val markPokemonAsFavoriteUseCase: MarkPokemonAsFavoriteUseCase,
     ) : ViewModel() {
         val homeUiState: StateFlow<HomeUiState> =

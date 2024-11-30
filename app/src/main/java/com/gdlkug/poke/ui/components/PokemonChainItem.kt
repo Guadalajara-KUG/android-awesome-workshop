@@ -1,4 +1,4 @@
-package com.gdlkug.poke.components
+package com.gdlkug.poke.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,17 +21,21 @@ import coil.compose.AsyncImage
 import com.gdlkug.poke.data.model.Species
 
 @Composable
-fun PokemonChainItem(modifier: Modifier, pokemon: Species) {
+fun PokemonChainItem(
+    modifier: Modifier,
+    pokemon: Species,
+) {
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiary,
-        )
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.tertiary,
+            ),
     ) {
         Row(
             modifier = modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             if (pokemon.name.isBlank()) {
                 PokemonImageNotFound(modifier = Modifier.width(50.dp))
@@ -39,7 +43,7 @@ fun PokemonChainItem(modifier: Modifier, pokemon: Species) {
                 AsyncImage(
                     model = pokemon.imageUrl,
                     contentDescription = pokemon.name,
-                    modifier = Modifier.width(50.dp)
+                    modifier = Modifier.width(50.dp),
                 )
             }
 
@@ -47,7 +51,7 @@ fun PokemonChainItem(modifier: Modifier, pokemon: Species) {
             Text(
                 text = pokemon.name,
                 fontSize = 18.sp,
-                color = Color.Black
+                color = Color.Black,
             )
         }
     }
@@ -57,12 +61,14 @@ fun PokemonChainItem(modifier: Modifier, pokemon: Species) {
 @Composable
 fun PokemonChainItemPreview() {
     PokemonChainItem(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(50.dp),
-        pokemon = Species(
-            name = "venasur",
-            url = "https://pokeapi.co/api/v2/pokemon/1/"
-        )
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(50.dp),
+        pokemon =
+            Species(
+                name = "venasur",
+                url = "https://pokeapi.co/api/v2/pokemon/1/",
+            ),
     )
 }

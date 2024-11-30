@@ -1,4 +1,4 @@
-package com.gdlkug.poke.domain.repository
+package com.gdlkug.poke.data.repository
 
 import com.gdlkug.poke.data.model.Pokedex
 import com.gdlkug.poke.data.model.PokemonPreview

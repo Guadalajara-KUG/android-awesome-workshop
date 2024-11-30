@@ -6,31 +6,25 @@ import com.gdlkug.poke.data.model.Species
 import com.google.gson.annotations.SerializedName
 
 data class EvolutionChainResponse(
-    @SerializedName("chain")
     val chain: ChainResponse? = null,
-    @SerializedName("id")
-    val id: Int? = null
+    val id: Int? = null,
 )
 
 data class ChainResponse(
-    @SerializedName("species")
     val species: SpeciesResponse? = null,
     @SerializedName("evolves_to")
-    val evolvesTo: ArrayList<EvolvesToResponse>? = null
+    val evolvesTo: ArrayList<EvolvesToResponse>? = null,
 )
 
 data class EvolvesToResponse(
-    @SerializedName("species")
     val species: SpeciesResponse? = null,
     @SerializedName("evolves_to")
-    val evolvesTo: ArrayList<EvolvesToResponse>? = null
+    val evolvesTo: ArrayList<EvolvesToResponse>? = null,
 )
 
 data class SpeciesResponse(
-    @SerializedName("name")
     val name: String? = null,
-    @SerializedName("url")
-    val url: String? = null
+    val url: String? = null,
 )
 
 fun EvolutionChainResponse.toEvolutionChain(): EvolutionChain {
@@ -45,11 +39,12 @@ fun EvolutionChainResponse.toEvolutionChain(): EvolutionChain {
 
     return EvolutionChain(
         id = id ?: -1,
-        chain = Chain(evolutionChainOrder)
+        chain = Chain(evolutionChainOrder),
     )
 }
 
-fun SpeciesResponse.toSpecies() = Species(
-    name = name ?: "",
-    url = url ?: ""
-)
+fun SpeciesResponse.toSpecies() =
+    Species(
+        name = name ?: "",
+        url = url ?: "",
+    )

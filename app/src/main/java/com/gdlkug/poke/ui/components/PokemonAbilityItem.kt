@@ -1,4 +1,4 @@
-package com.gdlkug.poke.components
+package com.gdlkug.poke.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
@@ -21,29 +21,33 @@ import com.gdlkug.poke.R
 import com.gdlkug.poke.data.model.Ability
 
 @Composable
-fun PokemonAbilityItem(modifier: Modifier, ability: Ability) {
+fun PokemonAbilityItem(
+    modifier: Modifier,
+    ability: Ability,
+) {
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiary,
-        )
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.tertiary,
+            ),
     ) {
         Row(
             modifier = modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Image(
                 painter = painterResource(id = R.drawable.tm_normal),
                 contentDescription = "Ability ${ability.name}",
-                modifier = Modifier.width(50.dp)
+                modifier = Modifier.width(50.dp),
             )
 
             Spacer(modifier = Modifier.width(16.dp))
             Text(
                 text = ability.name,
                 fontSize = 18.sp,
-                color = Color.Black
+                color = Color.Black,
             )
         }
     }
