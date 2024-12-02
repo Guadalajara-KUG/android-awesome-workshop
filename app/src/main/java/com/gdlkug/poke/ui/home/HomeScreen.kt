@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -16,7 +16,6 @@ import com.gdlkug.poke.data.model.PokemonPreview
 import com.gdlkug.poke.ui.components.CustomAlertDialog
 import com.gdlkug.poke.ui.components.LoadingComponent
 import com.gdlkug.poke.ui.components.PokedexList
-import com.gdlkug.poke.ui.detail.PokemonDetailScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -27,7 +26,7 @@ class HomeScreen(
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val homeViewModel: HomeViewModel = getViewModel()
-        val homeUiState by homeViewModel.homeUiState.collectAsState()
+        val homeUiState by homeViewModel.homeUiState.collectAsStateWithLifecycle()
 
         Column(
             modifier =
@@ -52,7 +51,7 @@ class HomeScreen(
                     PokedexList(
                         pokemons = state.pokedex.pokemonList,
                         onItemClicked = {
-                            navigator.push(PokemonDetailScreen(it))
+                            TODO("What to do on click")
                         },
                         onLargeItemClicked = {
                             homeViewModel.markPokemonAsFavorite(it)
@@ -60,11 +59,6 @@ class HomeScreen(
                     )
                 }
             }
-        }
-
-        pokemonByUrl?.let {
-            navigator.push(PokemonDetailScreen(it))
-            pokemonByUrl = null
         }
     }
 
