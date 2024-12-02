@@ -2,49 +2,29 @@ package com.gdlkug.poke.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gdlkug.poke.domain.model.Product
-import com.gdlkug.poke.domain.model.User
-import com.gdlkug.poke.domain.model.UserWithProducts
-import com.gdlkug.poke.domain.usecase.GetProductsUseCase
-import com.gdlkug.poke.domain.usecase.GetUserDetailsUseCase
-import com.gdlkug.poke.domain.usecase.GetUserWithProductsUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.gdlkug.poke.data.local.entity.AuthorEntity
+import com.gdlkug.poke.data.local.entity.BookEntity
+import com.gdlkug.poke.data.local.entity.BookWithAuthor
+import com.gdlkug.poke.data.repository.LibraryRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-
 class HomeViewModel(
-    private val getProductsUseCase: GetProductsUseCase,
-    private val getUserDetailsUseCase: GetUserDetailsUseCase,
-    private val getUserWithProductsUseCase: GetUserWithProductsUseCase
+    private val repository: LibraryRepository
 ): ViewModel() {
-    private val _products = MutableStateFlow<List<Product>>(emptyList())
-    val products: StateFlow<List<Product>>
-        get() = _products
 
-    private val _userDetails = MutableStateFlow<User?>(null)
-    val userDetails: StateFlow<User?>
-        get() = _userDetails
+    val booksWithAuthors: Flow<List<BookWithAuthor>> = repository.getBooksWithAuthors()
+    val authors: Flow<List<AuthorEntity>> = repository.getAllAuthors()
 
-    private val _userWithProducts = MutableStateFlow<UserWithProducts?>(null)
-    val userWithProducts: StateFlow<UserWithProducts?>
-        get() = _userWithProducts
-
-    fun fetchProducts() {
+    fun addBook(title: String, authorId: Int) {
         viewModelScope.launch {
-            _products.value = getProductsUseCase()
+            repository.addBook(BookEntity(title = title, authorId = authorId))
         }
     }
 
-    fun fetchUserDetails(userId: Int) {
+    fun addAuthor(name: String) {
         viewModelScope.launch {
-            _userDetails.value = getUserDetailsUseCase(userId)
-        }
-    }
-
-    fun fetchUserWithProducts(userId: Int) {
-        viewModelScope.launch {
-            _userWithProducts.value = getUserWithProductsUseCase(userId)
+            repository.addAuthor(AuthorEntity(name = name))
         }
     }
 }

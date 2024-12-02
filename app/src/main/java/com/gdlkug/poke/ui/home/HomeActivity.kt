@@ -2,85 +2,50 @@ package com.gdlkug.poke.ui.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.gdlkug.poke.data.implementations.ProductRepositoryImpl
-import com.gdlkug.poke.data.implementations.UserRepositoryImpl
-import com.gdlkug.poke.domain.model.Product
-import com.gdlkug.poke.domain.model.User
-import com.gdlkug.poke.domain.model.UserWithProducts
-import com.gdlkug.poke.domain.usecase.GetProductsUseCase
-import com.gdlkug.poke.domain.usecase.GetUserDetailsUseCase
-import com.gdlkug.poke.domain.usecase.GetUserWithProductsUseCase
-import com.gdlkug.poke.ui.theme.PokedexTheme
+import androidx.room.Room
+import com.gdlkug.poke.data.local.database.LibraryDatabase
+import com.gdlkug.poke.data.local.entity.BookWithAuthor
+import com.gdlkug.poke.data.repository.LibraryRepository
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-
 class HomeActivity : ComponentActivity() {
-    private val productsUseCase = GetProductsUseCase(ProductRepositoryImpl())
-    private val userDetailUseCase = GetUserDetailsUseCase(UserRepositoryImpl())
-    private val userWithProductsUseCase = GetUserWithProductsUseCase(
-        getProductsUseCase = productsUseCase,
-        getUserDetailsUseCase = userDetailUseCase
-    )
-
-    private val viewModel: HomeViewModel by lazy {
-        HomeViewModel(
-            getProductsUseCase = productsUseCase,
-            getUserDetailsUseCase = userDetailUseCase,
-            getUserWithProductsUseCase = userWithProductsUseCase
-        )
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        observeViewModel()
+        val db = Room.databaseBuilder(
+            applicationContext,
+            LibraryDatabase::class.java, "library-database"
+        ).build()
 
-        setContent {
-            PokedexTheme {
-                viewModel.fetchProducts()
-                viewModel.fetchUserDetails(1)
-                viewModel.fetchUserWithProducts(1)
-            }
+        val libraryRepository = LibraryRepository(
+            bookDao = db.bookDao(),
+            authorDao = db.authorDao()
+        )
+
+        val viewModel: HomeViewModel by lazy {
+            HomeViewModel(
+                repository = libraryRepository
+            )
         }
-    }
 
-    private fun observeViewModel() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    viewModel.userWithProducts.collect(::printUserWithProducts)
-                }
-
-                launch {
-                    viewModel.products.collect(::printProducts)
-                }
-
-                launch {
-                    viewModel.userDetails.collect(::printUser)
+                    viewModel.booksWithAuthors.collect(::printBookWithAuthor)
                 }
             }
         }
+
+        viewModel.addAuthor("J.K. Rowling")
+        viewModel.addBook("Harry Potter", 1)
     }
 
-    fun printUserWithProducts(userWithProducts: UserWithProducts?) {
-        userWithProducts?.let { (user, products) ->
-            println("User: $user")
-            println("Products: $products")
-        }
-    }
-
-    fun printUser(user: User?) {
-        user?.let {
-            println("User Details: $it")
-        }
-    }
-
-    fun printProducts(listOfProducts: List<Product>) {
-        listOfProducts.forEach {
-            println("User Details: $it")
+    private fun printBookWithAuthor(list: List<BookWithAuthor>) {
+        list.forEach {
+            println("Book: ${it.book.title}, Author: ${it.author.name}")
         }
     }
 }
