@@ -1,6 +1,6 @@
 package com.gdlkug.poke.data.network.client
 
-import com.gdlkug.poke.data.errors.PokemonException
+import com.gdlkug.poke.errors.PokemonException
 import com.gdlkug.poke.data.network.dto.EvolutionChainResponse
 import com.gdlkug.poke.data.network.dto.PokemonAbilitiesResponse
 import com.gdlkug.poke.data.network.dto.PokemonSpeciesResponse
@@ -24,7 +24,7 @@ class PokemonNetworkClient
                         pokemonRetrofitService.getPokemonSpeciesByIdOrName(idOrName)
                     }
                 if (response.isSuccessful) {
-                    Result.success((response.body().default(PokemonSpeciesResponse())))
+                    Result.success(response.body().default(PokemonSpeciesResponse()))
                 } else {
                     Result.failure(PokemonException("Failed to fetch species by id or name", response.code()))
                 }

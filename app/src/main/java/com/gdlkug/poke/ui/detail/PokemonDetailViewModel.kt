@@ -2,7 +2,7 @@ package com.gdlkug.poke.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gdlkug.poke.data.errors.PokemonException
+import com.gdlkug.poke.errors.PokemonException
 import com.gdlkug.poke.data.model.PokemonSpecies
 import com.gdlkug.poke.domain.useCase.GetPokemonDetailByIdOrNameUseCase
 import com.gdlkug.poke.util.extension.default

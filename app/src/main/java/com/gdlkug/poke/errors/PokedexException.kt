@@ -1,4 +1,4 @@
-package com.gdlkug.poke.data.errors
+package com.gdlkug.poke.errors
 
 class PokedexException(
     override val message: String?,

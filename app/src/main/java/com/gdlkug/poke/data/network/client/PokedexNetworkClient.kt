@@ -1,6 +1,6 @@
 package com.gdlkug.poke.data.network.client
 
-import com.gdlkug.poke.data.errors.PokedexException
+import com.gdlkug.poke.errors.PokedexException
 import com.gdlkug.poke.data.network.dto.PokedexResponse
 import com.gdlkug.poke.data.network.services.PokedexRetrofitService
 import com.gdlkug.poke.di.IoDispatcher

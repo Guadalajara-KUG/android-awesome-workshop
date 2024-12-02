@@ -1,6 +1,6 @@
 package com.gdlkug.poke.data.repository
 
-import com.gdlkug.poke.data.errors.PokedexException
+import com.gdlkug.poke.errors.PokedexException
 import com.gdlkug.poke.data.local.client.PokedexLocalClient
 import com.gdlkug.poke.data.local.entities.toPokemonPreview
 import com.gdlkug.poke.data.model.Pokedex

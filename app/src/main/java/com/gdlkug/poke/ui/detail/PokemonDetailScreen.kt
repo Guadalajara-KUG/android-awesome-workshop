@@ -13,6 +13,7 @@ import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.gdlkug.poke.data.model.PokemonPreview
+import com.gdlkug.poke.errors.PokemonException
 import com.gdlkug.poke.ui.components.CustomAlertDialog
 import com.gdlkug.poke.ui.components.LoadingComponent
 import com.gdlkug.poke.ui.home.HomeScreen
@@ -45,8 +46,8 @@ class PokemonDetailScreen(
                 is PokemonDetailUiState.CommunicationError -> {
                     CustomAlertDialog(
                         navigator,
-                        state.error.message,
-                        state.error.code,
+                        PokemonException.message,
+                        PokemonException.code,
                     )
                 }
 
