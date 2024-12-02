@@ -1,69 +1,31 @@
 package com.gdlkug.poke.data.repository
 
-import com.gdlkug.poke.data.errors.PokemonException
 import com.gdlkug.poke.data.model.EvolutionChain
 import com.gdlkug.poke.data.model.PokemonAbilities
 import com.gdlkug.poke.data.model.PokemonSpecies
-import com.gdlkug.poke.data.network.dto.EvolutionChainResponse
-import com.gdlkug.poke.data.network.dto.PokemonAbilitiesResponse
-import com.gdlkug.poke.data.network.dto.PokemonSpeciesResponse
+import com.gdlkug.poke.data.network.client.PokemonNetworkClient
 import com.gdlkug.poke.data.network.dto.toEvolutionChain
 import com.gdlkug.poke.data.network.dto.toPokemonAbilities
 import com.gdlkug.poke.data.network.dto.toPokemonSpecies
-import com.gdlkug.poke.data.network.services.PokemonRetrofitService
-import com.gdlkug.poke.di.IoDispatcher
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class PokemonRepositoryImpl
     @Inject
     constructor(
-        private val pokemonService: PokemonRetrofitService,
-        @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+        private val pokemonNetworkClient: PokemonNetworkClient,
     ) : PokemonRepository {
         override suspend fun getPokemonSpeciesDetailByIdOrName(idOrName: String): Result<PokemonSpecies> =
-            try {
-                val response =
-                    withContext(ioDispatcher) {
-                        pokemonService.getPokemonSpeciesDetailByIdOrName(idOrName)
-                    }
-                if (response.isSuccessful) {
-                    Result.success((response.body() ?: PokemonSpeciesResponse()).toPokemonSpecies())
-                } else {
-                    Result.failure(PokemonException("Failed to fetch species by id or name", response.code()))
-                }
-            } catch (ex: Exception) {
-                Result.failure(PokemonException(ex.message, -1))
+            pokemonNetworkClient.getPokemonSpeciesResponseByIdOrName(idOrName).map {
+                it.toPokemonSpecies()
             }
 
         override suspend fun getEvolutionChainById(id: String): Result<EvolutionChain> =
-            try {
-                val response =
-                    withContext(ioDispatcher) {
-                        pokemonService.getEvolutionChainById(id)
-                    }
-                if (response.isSuccessful) {
-                    Result.success((response.body() ?: EvolutionChainResponse()).toEvolutionChain())
-                } else {
-                    Result.failure(PokemonException("Failed to fetch evolution chain by id", response.code()))
-                }
-            } catch (ex: Exception) {
-                Result.failure(PokemonException(ex.message, -1))
+            pokemonNetworkClient.getEvolutionChainResponseById(id).map {
+                it.toEvolutionChain()
             }
 
         override suspend fun getPokemonAbilitiesByIdOrName(idOrName: String): Result<PokemonAbilities> =
-            try {
-                val response =
-                    withContext(ioDispatcher) {
-                        pokemonService.getPokemonAbilitiesByIdOrName(idOrName)
-                    }
-                if (response.isSuccessful) {
-                    Result.success((response.body() ?: PokemonAbilitiesResponse()).toPokemonAbilities())
-                } else {
-                    Result.failure(PokemonException("Failed to fetch abilities by id or name", response.code()))
-                }
-            } catch (ex: Exception) {
-                Result.failure(PokemonException(ex.message, -1))
+            pokemonNetworkClient.getPokemonAbilitiesResponseByIdOrName(idOrName).map {
+                it.toPokemonAbilities()
             }
     }

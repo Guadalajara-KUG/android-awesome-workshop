@@ -9,17 +9,17 @@ import retrofit2.http.Path
 
 interface PokemonRetrofitService {
     @GET("pokemon-species/{idOrName}/")
-    suspend fun getPokemonSpeciesDetailByIdOrName(
-        @Path("idOrName") idOrName: String
+    suspend fun getPokemonSpeciesByIdOrName(
+        @Path("idOrName") idOrName: String,
     ): Response<PokemonSpeciesResponse>
 
     @GET("evolution-chain/{id}/")
     suspend fun getEvolutionChainById(
-        @Path("id") id: String
+        @Path("id") id: String,
     ): Response<EvolutionChainResponse>
 
     @GET("pokemon/{idOrName}/")
     suspend fun getPokemonAbilitiesByIdOrName(
-        @Path("idOrName") idOrName: String
+        @Path("idOrName") idOrName: String,
     ): Response<PokemonAbilitiesResponse>
 }
