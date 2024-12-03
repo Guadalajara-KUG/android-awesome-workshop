@@ -54,7 +54,6 @@ android {
 }
 
 dependencies {
-    implementation(kotlin("reflect"))
     implementation(libs.androidx.coreKtx)
 
     // Compose
